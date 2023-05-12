@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <link rel="stylesheet" href="./css/style.css">
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="movies">
+            <div class="movies__title">
+                <h1>guardians of the galaxy vol. 3</h1>
+                <div class="movies__rating">
+                    <p class="rating-title">rating:</p>
+                    <p class="rating-start">9
+                    <p>/</p>
+                    <p class="rating-finish">10</p>
+                    </p>
+                    <div class="rating__modal">
+                        <p>Rate this <br>
+                           <span>Sharper </span></p>
+                           <input class="rating__modal-input" type="number" placeholder="10" value="10">
+                           <button class="rating__modal-button" type="submit">rate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movies__body">
+                <div class="movies__body-img"><img src="./images/1.jpg" alt="movie-img"></div>
+                <div class="movies__body-info">
+                    <p>Still reeling from the loss of Gamora, Peter Quill must rally his team to defend the universe and
+                        protect one of their own. If the mission is not completely successful, it could possibly lead to
+                        the end of the Guardians as we know them.</p>
+                    <div class="genre"><a href="#">
+                            <p>Drama</p>
+                        </a>
+                        <a href="#">
+                            <p>Fantasy</p>
+                        </a>
+                    </div>
+                    <div class="cast">
+                        <p class="cast__title">Cast:</p>
+                        <div class="cast__actors">
+                            <div class="actor">
+                                <div class="actor__img"><img src="./images/actors/pratt.jpg" alt="actor"></div>
+                                <div class="actor__name">
+                                    Chris Pratt
+                                </div>
+
+                            </div>
+                            <div class="actor">
+                                <div class="actor__img"><img src="./images/actors/cooper.jpg" alt="actor"></div>
+                                <div class="actor__name">
+                                    Bradley Cooper
+                                </div>
+
+                            </div>
+                            <div class="actor">
+                                <div class="actor__img"><img src="./images/actors/saldana.jpg" alt="actor"></div>
+                                <div class="actor__name">
+                                    Zoe Saldana
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="movies__similar">
+                <h2>Similar movies</h2>
+                <div class="film">
+                    <img src="./images/2.jpg" alt="film">
+                    <img src="./images/3.jpg" alt="film">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./data.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
