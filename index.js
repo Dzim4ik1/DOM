@@ -1,57 +1,135 @@
-const modal = document.querySelector(".rating__modal");
-const rating = document.querySelector(".movies__rating");
-let averageRating = document.querySelector(".rating-start");
-let ratingInput = document.querySelector(".rating__modal-input");
-const ratingButton = document.querySelector(".rating__modal-button");
+import { movies } from "./data.js";
 
+// task 1
 
+let thisYear = new Date().getFullYear();
+let newMovie = movies.map((newMovie) => {
+  let actorsAge = newMovie.actors.map((actor) => {
+    let age = thisYear - actor.birthyear;
+    if (actor.birthyear == null) {
+      actor.birthyear = "тут должен быть год рождения актера";
+      age = "тут должен быть возраст актера";
+    }
+    return { ...actor, age };
+  });
 
-// rating color changer
-if (averageRating.innerHTML >= 0 && averageRating.innerHTML < 5) {
-  averageRating.style.color = "red";
-} else if (averageRating.innerHTML >= 5 && averageRating.innerHTML < 8) {
-  averageRating.style.color = "yellow";
-} else if (averageRating.innerHTML >= 8 && averageRating.innerHTML <= 10) {
-  averageRating.style.color = "#ADBF3A";
-}
-
-// rating limit 1 - 10
-ratingInput.addEventListener("change", function () {
-  let v = parseInt(this.value);
-  if (v < 1) this.value = 1;
-  if (v > 10) this.value = 10;
+  return { ...newMovie, actors: actorsAge };
 });
 
-// add active class to show modal
+console.log(newMovie);
 
-rating.onmouseover = rating.onmouseout = rating.onmousemove = handler;
+// task 2
 
-function handler(event) {
-  if (event.type == "mouseover") {
-    modal.classList.add("active");
-  }
-}
+const moviesGenres = movies.reduce((genreArr, movie) => {
+  movie.genre.forEach((genre) => {
+    !genreArr.includes(genre) ? genreArr.push(genre) : false;
+  });
+  return genreArr;
+}, []);
 
-// array to store movie rating
-let ratingArr = [];
-ratingArr.push(Number(averageRating.innerHTML));
-
-
-// calculate the average rating in the array
-ratingButton.addEventListener("click", function () {
-    ratingArr.push(Number(ratingInput.value));
-    console.log(ratingArr);
-  averageRating.innerHTML = (ratingArr.reduce((a, b) => (a + b)) / ratingArr.length).toFixed(1); //round to 1 decimal place
-
-  if (averageRating.innerHTML >= 0 && averageRating.innerHTML < 5) {
-    averageRating.style.color = "red";
-  } else if (averageRating.innerHTML >= 5 && averageRating.innerHTML < 8) {
-    averageRating.style.color = "yellow";
-  } else if (averageRating.innerHTML >= 8 && averageRating.innerHTML <= 10) {
-    averageRating.style.color = "#ADBF3A";
-  }
-
-  modal.classList.remove("active");
-
-  return averageRating;
+const newMoviesGenres = moviesGenres.map((i) => {
+  return {
+    name: i,
+    movies: movies.filter((movie) => movie.genre.includes(i)),
+    //
+  };
 });
+
+console.log(newMoviesGenres);
+
+//task 3
+
+const getMovie = (id) => {
+  let containerBlock = document.querySelector(".movies");
+
+  movies.forEach((movie) => {
+    if (id === movie.id) {
+      containerBlock.innerHTML = `
+     <div class="movies__title">
+         <h1>${movie.title}</h1>
+         <div class="movies__rating">
+             <p class="rating-title">rating:</p>
+             <p class="rating-start">${movie.rating}
+             <p>/</p>
+             <p class="rating-finish">10</p>
+             </p>
+             <div class="rating__modal">
+                 <p>Rate this <br>
+                    <span>Sharper </span></p>
+                    <input class="rating__modal-input" type="number" placeholder="10" value="10">
+                    <button class="rating__modal-button" type="submit">rate</button>
+             </div>
+         </div>
+     </div>
+     <div class="movies__body">
+         <div class="movies__body-img"><img src="./images/${movie.id}.jpg" alt="movie-img"></div>
+         <div class="movies__body-info">
+             <p>${movie.description}</p>
+             <div class="genre">
+        
+             </div>
+             <div class="cast">
+                 <p class="cast__title">Cast:</p>
+                 <div class="cast__actors">
+                   
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="movies__similar">
+         <h2>Similar movies</h2>
+         <div class="film">
+         
+           
+         </div>
+     </div>
+ `;
+
+      movie.genre.forEach((genre) => {
+        let movieGenre = document.querySelector(".genre");
+        let linkGenre = document.createElement("a");
+        let titleGenre = document.createElement("p");
+
+        movieGenre.appendChild(linkGenre);
+        linkGenre.appendChild(titleGenre);
+        titleGenre.innerText = genre;
+      });
+
+      movie.actors.forEach((actor) => {
+        let castActor = document.querySelector(".cast__actors");
+        let actorBlock = document.createElement("div");
+        actorBlock.classList = "actor";
+        castActor.appendChild(actorBlock);
+
+        let actorSrc = actor.name.split(" ")[1].toLowerCase();
+
+        let actorImg = document.createElement("div");
+        actorImg.classList = "actor__img";
+        actorBlock.appendChild(actorImg);
+        let img = document.createElement("img");
+        actorImg.appendChild(img);
+        img.src = ` ./images/actors/${actorSrc}.jpg`;
+
+        let actorName = document.createElement("div");
+        actorName.classList = "actor__name";
+        actorBlock.appendChild(actorName);
+        actorName.innerText = actor.name;
+      });
+      movie.similar.forEach((i)=> {
+       
+          let setSimilarMovie = document.querySelector('.film')
+          let similarMovieImg = document.createElement('img')
+          setSimilarMovie.appendChild(similarMovieImg)
+          similarMovieImg.src = `./images/${++(movie.id)}.jpg`
+         
+      
+
+        
+      })
+     
+      
+    }
+  });
+};
+
+getMovie(1);

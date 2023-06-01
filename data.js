@@ -1,4 +1,4 @@
-const movies = [
+export const movies = [
   {
     id: 1,
     title: "Guardians of the Galaxy Vol. 3",
@@ -78,64 +78,3 @@ const movies = [
     rating: 3.3,
   },
 ];
-
-// task 1
-
-let thisYear = new Date().getFullYear();
-let newMovie = movies.map((newMovie) => {
-  let actorsAge = newMovie.actors.map((actor) => {
-    let age = thisYear - actor.birthyear;
-    return { ...actor, age };
-  });
-  return { ...newMovie, actors: actorsAge };
-});
-
-console.log(newMovie);
-
-// task 2
-const genreObject = [
-  {
-    name: "Thriller",
-    movies: ["Plane", "Sharper"],
-  },
-  {
-    name: "Adventure",
-    movies: ["Guardians of the Galaxy Vol. 3", "Plane"],
-  },
-  {
-    name: "Crime",
-    movies: ["John Wick: Chapter 4", " AKA "],
-  },
-  {
-    name: "Drama",
-    movies: [" Heat", "John Wick: Chapter 4", "The Batman"],
-  },
-  {
-    name: "Comedy",
-    movies: ["Friends", " After Hours", "AKA"],
-  },
-];
-
-// task 3
-// let movieTitle = document.querySelector(".movies__title");
-// let movieRate = document.querySelector(".movies__rating");
-
-// const getMovie = (id) => {
-
-
-//   movies.forEach((movie) => {
-//     if (id === movie.id) {
-//       const movieName = document.createElement("h1");
-//       movieName.innerText = movie.title;
-//     movieTitle.appendChild(movieName);
-
-//     const movieRat = document.createElement("p.rating-start");
-//     movieRat.innerText = movie.rating;
-//     movieRate.append(movieRat);
-    
-
-//     }
-    
-//   });
-// };
-// getMovie(1)
