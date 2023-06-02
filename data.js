@@ -1,4 +1,4 @@
-export const movies = [
+ const movies = [
   {
     id: 1,
     title: "Guardians of the Galaxy Vol. 3",
@@ -78,3 +78,5 @@ export const movies = [
     rating: 3.3,
   },
 ];
+
+export default movies

@@ -1,4 +1,3 @@
-import { movies } from "../data.js";
 
 function colorChanger() {
   const modal = document.querySelector(".rating__modal");
@@ -66,4 +65,4 @@ function colorChanger() {
   });
 }
 
-colorChanger();
+export default colorChanger

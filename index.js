@@ -1,5 +1,5 @@
-import { movies } from "./data.js";
-
+import  movies  from "./data.js";
+import  colorChanger  from "./modules/ratingChanger.js";
 // task 1
 
 let thisYear = new Date().getFullYear();
@@ -39,10 +39,15 @@ console.log(newMoviesGenres);
 
 //task 3
 
+
 const getMovie = (id) => {
   let containerBlock = document.querySelector(".movies");
 
   movies.forEach((movie) => {
+
+		function changeSimilaeImg(){
+			if (movie.id >=3) { return --movie.id} else { return ++movie.id}
+		}		
     if (id === movie.id) {
       containerBlock.innerHTML = `
      <div class="movies__title">
@@ -115,21 +120,16 @@ const getMovie = (id) => {
         actorBlock.appendChild(actorName);
         actorName.innerText = actor.name;
       });
-      movie.similar.forEach((i)=> {
-       
-          let setSimilarMovie = document.querySelector('.film')
-          let similarMovieImg = document.createElement('img')
-          setSimilarMovie.appendChild(similarMovieImg)
-          similarMovieImg.src = `./images/${++(movie.id)}.jpg`
-         
-      
-
-        
-      })
-     
-      
+      movie.similar.forEach((i) => {
+        let setSimilarMovie = document.querySelector(".film");
+        let similarMovieImg = document.createElement("img");
+        setSimilarMovie.appendChild(similarMovieImg);
+        similarMovieImg.src = `./images/${changeSimilaeImg()}.jpg`;
+      });
     }
   });
 };
 
-getMovie(1);
+
+getMovie(2);
+colorChanger();
